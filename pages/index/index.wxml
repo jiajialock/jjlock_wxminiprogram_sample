@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    
+    <button bindtap='scanLocks' >扫描绑定锁</button>
+    <button bindtap='openLock' >开锁</button>
+    <button bindtap='syncTime' >同步时间</button>
+    <button bindtap='syncData' >同步开锁记录</button>
+    <button bindtap='addCard' >增加卡</button>
+    <button bindtap='editCard' >修改卡</button>
+    <button bindtap='deleteCard' >删除卡</button>
+    <button bindtap='deleteLock' >注销锁</button>
+    
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>
