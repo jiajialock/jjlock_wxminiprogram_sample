@@ -9,7 +9,7 @@
     <button bindtap='addCard' >增加卡</button>
     <button bindtap='editCard' >修改卡</button>
     <button bindtap='deleteCard' >删除卡</button>
-    <button bindtap='deleteLock' >注销锁</button>
+    <button bindtap='deleteLock' >解绑锁</button>
     
   </view>
   <view class="usermotto">

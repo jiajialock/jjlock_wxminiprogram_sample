@@ -8,16 +8,10 @@ Page({
   data: {
    
   },
-  onShow: function () {
-    
-  },
-  onLoad: function () {
-    
-  },
   
   openLock: function (e) {
-    handleOpenLock(lock, () => {
-      console.log("opened lock");
+    handleOpenLock(lock, (response) => {
+      console.log(response);
     })
   },
   deleteLock: function (e) {
@@ -27,7 +21,9 @@ Page({
       showCancel:true,
       success: (res) => {
         if (res.confirm) {
-          handleDeleteLock(lock);
+          handleDeleteLock(lock,(response)=>{
+            console.log(response);
+          });
         }
       }
     })
@@ -41,6 +37,7 @@ Page({
       success: (res) => {
         if (res.confirm) {
           handleSearchLock((item) => {
+            console.log(item);
             wx.showModal({
               title: "找到锁"+item.name,
               content: "确认绑定吗？",
@@ -48,6 +45,7 @@ Page({
               success: (res) => {
                 if (res.confirm) {
                   handleBindLock(item, () => {
+                    console.log(item);
                     handleInformLock(item);
                     item.binded = true;
                     lock = item;
