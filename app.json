@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+	"scope.userLocation": {
+		"desc": "你的位置信息将用于小程序调用手机蓝牙"
+	}
+ },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
