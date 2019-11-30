@@ -134,7 +134,10 @@
 同步时间需要在锁旁操作
 
     /** 
-    
+    response={
+        succeed:为true时成功，false时失败 
+        reason:失败原因
+    }
     **/
     handleSyncLockTime(lock, (response) => {
       
