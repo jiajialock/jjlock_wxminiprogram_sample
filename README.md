@@ -43,8 +43,15 @@
     **/
     handleBindLock(lock, () => {
         // TODO:此处把lock存储到服务器，至少需要存储以下字段：lockName,lockAlias,lockMac,anyCode,randomString,initialTimeString,timezoneRawOffset,advertiseData
-        /** 存储成功后通知锁绑定成功 **/
-        handleInformLock(lock);
+        /** 存储成功后通知锁绑定成功
+        response={   
+           succeed:为true时成功，false时失败 
+           reason:失败时有值
+        }
+        **/
+        handleInformLock(lock,(response)=>{
+            
+        });
     });
     
 ## 蓝牙开锁
@@ -53,8 +60,9 @@
     /**
     lock为服务器上保存的对象，直接调 用此方法可以开锁，开锁成功后需要自行上传服务器蓝牙的开锁记录。
     * response={
-        succeed::为true时成功，false时失败 
+        succeed:为true时成功，false时失败 
         electricity:电量百分比
+        reason:失败时有值
     }
     **/
     handleOpenLock(lock, (response) => {

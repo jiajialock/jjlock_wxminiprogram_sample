@@ -8,7 +8,8 @@ Page({
   data: {
    
   },
-  
+  onLoad:function(){
+  },
   openLock: function (e) {
     handleOpenLock(lock, (response) => {
       console.log(response);
@@ -46,7 +47,10 @@ Page({
                 if (res.confirm) {
                   handleBindLock(item, () => {
                     console.log(item);
-                    handleInformLock(item);
+                    handleInformLock(item, (response)=>{
+                      console.log(response);
+
+                    });
                     item.binded = true;
                     lock = item;
                   });
@@ -60,35 +64,35 @@ Page({
     })
   },
   syncTime: function () {
-    handleSyncLockTime(lock, () => {
-      console.log("sync time");
+    handleSyncLockTime(lock, (response) => {
+      console.log(response);
     })
   },
   syncData: function () {
-    handleSyncLockData(lock, (params) => {
-      console.log(params);
+    handleSyncLockData(lock, (response) => {
+      console.log(response);
     })
   },
   addCard: function () {
-    handleReadCard(lock, (params) => {
-      console.log(params);
+    handleReadCard(lock, (response) => {
+      console.log(response);
       var password = "1836748";
-      handleAddLockCardPassword(lock, params.identifier, password, (response) => {
-        console.log(response);
+      handleAddLockCardPassword(lock, response.identifier, password, (addResponse) => {
+        console.log(addResponse);
 
       });
     })
   },
   editCard: function () {
     var password = card.password;
-    handleEditLockCardPassword(lock, card.identifier, password, (data) => {
-      console.log(data);
+    handleEditLockCardPassword(lock, card.identifier, password, (response) => {
+      console.log(response);
 
     });
   },
   deleteCard: function () {
-    handleDeleteLockCardPassword(lock, card.identifier, (data) => {
-      console.log(data);
+    handleDeleteLockCardPassword(lock, card.identifier, (response) => {
+      console.log(response);
 
     });
   },
