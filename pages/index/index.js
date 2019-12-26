@@ -1,34 +1,47 @@
 //index.js
 //获取应用实例
-const app = getApp()
-const { handleOpenLock, handleDeleteLock, handleSearchLock, handleBindLock, handleInformLock, handleSyncLockTime, handleSyncLockData, handleReadCard, handleAddLockCardPassword, handleEditLockCardPassword, handleDeleteLockCardPassword }  = require("../../utils/jjzns.js");
-var lock = require("../../datas/lock.js")
-var card = require("../../datas/card.js")
+var plugin = requirePlugin("jjzns");
+var lock = require("../../datas/lock.js");
+var card = require("../../datas/card.js");
 Page({
   data: {
-   
   },
-  onLoad:function(){
-  },
+
   openLock: function (e) {
-    handleOpenLock(lock, (response) => {
+    plugin.handleOpenLock(lock, (response) => {
       console.log(response);
+
     })
   },
   deleteLock: function (e) {
     wx.showModal({
-      title:"解绑",
-      content:"解绑前请先拍亮锁面板！确认解绑吗？",
-      showCancel:true,
+      title: "解绑",
+      content: "解绑前请先拍亮锁面板！确认解绑吗？",
+      showCancel: true,
       success: (res) => {
         if (res.confirm) {
-          handleDeleteLock(lock,(response)=>{
+          plugin.handleDeleteLock(lock, (response) => {
             console.log(response);
+
           });
         }
       }
     })
-   
+
+  },
+  syncTime: function () {
+    plugin.handleSyncLockTime(lock, (response) => {
+
+      console.log(response);
+
+
+    })
+  },
+  syncData: function () {
+    plugin.handleSyncLockData(lock, (response) => {
+      console.log(response);
+
+    })
   },
   scanLocks: function () {
     wx.showModal({
@@ -37,64 +50,54 @@ Page({
       showCancel: false,
       success: (res) => {
         if (res.confirm) {
-          handleSearchLock((item) => {
+          plugin.handleSearchLock((item) => {
             console.log(item);
+            if (item.succeed === false) {
+              console.log(item);
+
+            }
+            console.log('searched lock:' + item);
             wx.showModal({
-              title: "找到锁"+item.name,
+              title: "找到锁" + item.name,
               content: "确认绑定吗？",
               showCancel: true,
               success: (res) => {
                 if (res.confirm) {
-                  handleBindLock(item, () => {
-                    console.log(item);
-                    handleInformLock(item, (response)=>{
-                      console.log(response);
-
-                    });
+                  plugin.handleBindLock(item, (response) => {
+                    plugin.handleInformLockBinded(item);
                     item.binded = true;
                     lock = item;
+                    console.log(response);
                   });
                 }
               }
             })
-          
+
           }, false);
         }
       }
     })
   },
-  syncTime: function () {
-    handleSyncLockTime(lock, (response) => {
-      console.log(response);
-    })
-  },
-  syncData: function () {
-    handleSyncLockData(lock, (response) => {
-      console.log(response);
-    })
-  },
   addCard: function () {
-    handleReadCard(lock, (response) => {
-      console.log(response);
-      var password = "1836748";
-      handleAddLockCardPassword(lock, response.identifier, password, (addResponse) => {
-        console.log(addResponse);
-
+    plugin.handleReadCard(lock, (params) => {
+      console.log(params);
+      var password = "12466734";
+      plugin.handleAddLockCardPassword(lock, params.identifier, password, (response) => {
+        console.log(response);
       });
     })
   },
   editCard: function () {
-    var password = card.password;
-    handleEditLockCardPassword(lock, card.identifier, password, (response) => {
+    console.log(lock);
+    plugin.handleEditLockCardPassword(lock, card.identifier, card.password, (response) => {
       console.log(response);
 
-    });
+    })
   },
   deleteCard: function () {
-    handleDeleteLockCardPassword(lock, card.identifier, (response) => {
+    plugin.handleDeleteLockCardPassword(lock, card.identifier, (response) => {
       console.log(response);
 
     });
-  },
-
+  }
 })

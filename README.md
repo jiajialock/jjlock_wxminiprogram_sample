@@ -1,6 +1,4 @@
 # 家家智能锁小程序接入指南1.0
-## 使用指南
-这是一个小程序的源代码包。把project.config.json中appid修改成你有权限修改的小程序id或者是测试id后就可以用微信开发工具打开测试了。如果你要把这个接入自己的小程序，就把utils/jjzns.js拷贝到你自己小程序里面的目录，再在要调用的页面导入对应的方法就可以了。你可以在index页面中找到每一个方法的调用示例。
 ## 注意事项
 插件内内置了搜索打开蓝牙适配器等方法，对安卓和ios也有默认的适配，所以调用方可以只用关注自己的业务逻辑。另外因为微信小程序的限制，Android 6.0以上扫描蓝牙需要位置权限，如果没有位置权限会导致蓝牙功能不能正确使用。  
 ## 扫描搜索锁
@@ -22,11 +20,11 @@
      * isBinded为true时每找到一把被绑定了的锁就调用方法
      * isBinded为false时每找到一把没有被绑定的锁就调用方法
      ** /
-     handleSearchLock((lock)=>{
+     plugin.handleSearchLock((lock)=>{
          
      },isBinded);
 ## 绑定锁
-选择没有被绑定的锁,已经绑定过的锁不能重复绑定。绑定锁需要确保服务器和锁上数据一致，保存到服务器成功后需要调用handleInformLock(lock)通知锁绑定成功，绑定锁期间需要保持密码面板亮着。
+选择没有被绑定的锁,已经绑定过的锁不能重复绑定。绑定锁需要确保服务器和锁上数据一致，保存到服务器成功后需要调用handleInformLockBinded(lock)通知锁绑定成功，绑定锁期间需要保持密码面板亮着。
 
     /**
     调用绑定锁接口，这里的lock为扫描绑定锁返回的对象。
@@ -41,7 +39,7 @@
       }
      *
     **/
-    handleBindLock(lock, () => {
+    plugin.handleBindLock(lock, () => {
         // TODO:此处把lock存储到服务器，至少需要存储以下字段：lockName,lockAlias,lockMac,anyCode,randomString,initialTimeString,timezoneRawOffset,advertiseData
         /** 存储成功后通知锁绑定成功
         response={   
@@ -49,7 +47,7 @@
            reason:失败时有值
         }
         **/
-        handleInformLock(lock,(response)=>{
+        plugin.handleInformLockBinded(lock,(response)=>{
             
         });
     });
@@ -65,7 +63,7 @@
         reason:失败时有值
     }
     **/
-    handleOpenLock(lock, (response) => {
+    plugin.handleOpenLock(lock, (response) => {
       //TODO: 上传开锁记录
       
     })
@@ -80,7 +78,7 @@
         reason:succeed为false的时候这个有值
     }
     **/
-    handleDeleteLock(lock,(response)=>{
+    plugin.handleDeleteLock(lock,(response)=>{
         //TODO: response.succeed为true时去删除服务器上的锁。
     });
 
@@ -98,11 +96,11 @@
        reason:失败原因
     }
     **/
-    handleReadCard(lock, (response) => {
+    plugin.handleReadCard(lock, (response) => {
       //TODO: 此处调用服务器新增卡的接口得到这张卡的密码
       var password = "";
       /** 将得到的密码写入锁 **/
-      handleAddLockCardPassword(lock, response.identifier, password, (addResponse) => {
+      plugin.handleAddLockCardPassword(lock, response.identifier, password, (addResponse) => {
         
 
       });
@@ -120,7 +118,7 @@
         reason:失败原因
     }
     **/
-    handleEditLockCardPassword(lock, card.identifier, password, (response) => {
+    plugin.handleEditLockCardPassword(lock, card.identifier, password, (response) => {
         
         //TODO:response.succeed为false的时候需要调用服务器的回退修改卡把服务器修改回退了，具体参考服务器文档
     });
@@ -134,7 +132,7 @@
         reason:失败原因
     }
     **/
-    handleDeleteLockCardPassword(lock, card.identifier, (response) => {
+    plugin.handleDeleteLockCardPassword(lock, card.identifier, (response) => {
       //TODO:操作成功后再删掉服务器上的锁
 
     });
@@ -147,7 +145,7 @@
         reason:失败原因
     }
     **/
-    handleSyncLockTime(lock, (response) => {
+    plugin.handleSyncLockTime(lock, (response) => {
       
     })
 ## 同步开锁记录
@@ -159,6 +157,6 @@
         logLength:记录数量
     }
     **/
-    handleSyncLockData(lock, (response) => {
+    plugin.handleSyncLockData(lock, (response) => {
       //TODO:调用服务器接口将log同步到服务器上，调用对应的查询密码就可以看记录了
     })

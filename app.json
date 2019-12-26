@@ -2,6 +2,12 @@
   "pages": [
     "pages/index/index"
   ],
+  "plugins": {
+    "jjzns": {
+      "version": "1.0.3",
+      "provider": "wx374c88afff932784"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
