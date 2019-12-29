@@ -2,7 +2,8 @@
 ## 注意事项
 插件内内置了搜索打开蓝牙适配器等方法，对安卓和ios也有默认的适配，所以调用方可以只用关注自己的业务逻辑。另外因为微信小程序的限制，Android 6.0以上扫描蓝牙需要位置权限，如果没有位置权限会导致蓝牙功能不能正确使用。  
 ## 引入插件向导
-首先需要在小程序后台增加对小程序的引用，具体参考：https://developers.weixin.qq.com/miniprogram/dev/framework/plugin/using.html，此插件不需要申请，添加后就可以直接使用了。
+首先需要在小程序后台增加对小程序的引用，具体参考：https://developers.weixin.qq.com/miniprogram/dev/framework/plugin/using.html
+此插件不需要申请，添加后就可以直接使用了。
 ## 扫描搜索锁
  扫描周边的锁可以返回一个蓝牙锁，根据isBinded的值每找到一把锁就会调用一次方法。没有绑定的锁需要拍亮密码板才会被扫描到。
  
