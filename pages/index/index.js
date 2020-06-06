@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const { handleOpenLock, handleDeleteLock, handleSearchLock, handleBindLock, handleInformLock, handleSyncLockTime, handleSyncLockData, handleReadCard, handleAddLockCardPassword, handleEditLockCardPassword, handleDeleteLockCardPassword }  = require("../../utils/jjzns.js");
+const { handleOpenLock, handleDeleteLock, handleSearchLock, handleBindLock, handleInformLock, handleSyncLockTime, handleSyncLockData, handleReadCard, handleAddLockCardPassword, handleEditLockCardPassword, handleDeleteLockCardPassword,handeClearBluetoothDevices }  = require("../../utils/jjzns.js");
 var lock = require("../../datas/lock.js")
 var card = require("../../datas/card.js")
 Page({
@@ -53,12 +53,14 @@ Page({
 
                     });
                     item.binded = true;
+                    console.log("close connection")
+                    handeClearBluetoothDevices()
                     lock = item;
                   });
                 }
               }
             })
-          
+            
           }, false);
         }
       }

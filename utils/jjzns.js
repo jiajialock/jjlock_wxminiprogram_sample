@@ -1401,16 +1401,19 @@ const handleGetBluetoothDevices = (call, binded = undefined, error = undefined, 
           }
         });
       }
-      wx.onBluetoothDeviceFound((result) => {
-        let item = result.devices[0];
-        let data = JSON.stringify(item);
-        if (item && item.name && item.name.indexOf(lockNamePrefix) > -1) {
-          let mac = handleDeviceMacAddress(item);
-          if (mac) {
-            handleAdvertise(item, binded, mac, call);
+      if(hasDevice === false){
+        wx.onBluetoothDeviceFound((result) => {
+          let item = result.devices[0];
+          let data = JSON.stringify(item);
+          if (item && item.name && item.name.indexOf(lockNamePrefix) > -1) {
+            let mac = handleDeviceMacAddress(item);
+            if (mac) {
+              handleAdvertise(item, binded, mac, call);
+            }
           }
-        }
-      });
+        });
+
+      }
     },
     fail: () => {
       getErrorInfo(40001, error);
@@ -1722,7 +1725,7 @@ const handeStopBluetoothDevices = () => {
 /**
  * 清理查询到的设备
 */
-const handeClearBluetoothDevices = () => {
+export const handeClearBluetoothDevices = () => {
   wx.getBluetoothAdapterState({
     success: function (res) {
       if (res.discovering) {
