@@ -1725,7 +1725,7 @@ const handeStopBluetoothDevices = () => {
 /**
  * 清理查询到的设备
 */
-export const handeClearBluetoothDevices = () => {
+export const handleClearBluetoothDevices = () => {
   wx.getBluetoothAdapterState({
     success: function (res) {
       if (res.discovering) {
