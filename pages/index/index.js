@@ -45,6 +45,7 @@ Page({
               showCancel: true,
               success: (res) => {
                 if (res.confirm) {
+                  wx.stopBluetoothDevicesDiscovery();
                   handleBindLock(item, () => {
                     console.log(item);
                     handleInformLock(item, (response)=>{

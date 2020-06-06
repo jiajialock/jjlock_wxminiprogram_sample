@@ -1326,6 +1326,7 @@ const handleSearchBluetoothDevice = (call, hasServiceId = true) => {
 
   if (hasServiceId === false) {
     wx.startBluetoothDevicesDiscovery({
+      allowDuplicatesKey: false,
       success: (res) => {
         if (res.errMsg === 'startBluetoothDevicesDiscovery:ok') {
           call();
@@ -1341,6 +1342,7 @@ const handleSearchBluetoothDevice = (call, hasServiceId = true) => {
   } else {
     wx.startBluetoothDevicesDiscovery({
       services: [BLUETOOTH_READ_SERVICE_ID],
+      allowDuplicatesKey:false,
       success: (res) => {
         if (res.errMsg === 'startBluetoothDevicesDiscovery:ok') {
           call();
