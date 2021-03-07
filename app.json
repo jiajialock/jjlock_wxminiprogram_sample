@@ -4,7 +4,7 @@
   ],
   "plugins": {
     "jjzns": {
-      "version": "1.0.5",
+      "version": "1.0.7",
       "provider": "wx374c88afff932784"
     }
   },
