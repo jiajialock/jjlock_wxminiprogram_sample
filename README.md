@@ -1,6 +1,6 @@
 # 家家智能锁小程序接入指南1.0
 ## 注意事项
-插件内内置了搜索打开蓝牙适配器等方法，对安卓和ios也有默认的适配，所以调用方可以只用关注自己的业务逻辑。另外因为微信小程序的限制，Android 6.0以上扫描蓝牙需要位置权限，如果没有位置权限会导致蓝牙功能不能正确使用。  
+插件内内置了搜索打开蓝牙适配器等方法，对安卓和ios也有默认的适配，所以调用方可以只用关注自己的业务逻辑。另外因为微信小程序的限制，Android 6.0以上扫描蓝牙需要位置权限，如果没有位置权限会导致蓝牙功能不能正确使用。  2022 年 7 月 14 日后发布的小程序，需要遵守腾讯调用getLocation接口相关规定设置，详情请参考：https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.getLocation.html
 ## 引入插件向导
 首先需要在小程序后台增加对小程序的引用，具体参考：https://developers.weixin.qq.com/miniprogram/dev/framework/plugin/using.html
 此插件不需要申请，添加后就可以直接使用了。
